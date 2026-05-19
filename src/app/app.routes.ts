@@ -12,5 +12,9 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./features/movregular/routes')
                 .then(r => r.MOVREGULAR_ROUTES)
+    },
+    {
+        path: '**',
+        redirectTo: 'dashboard'
     }
 ];
