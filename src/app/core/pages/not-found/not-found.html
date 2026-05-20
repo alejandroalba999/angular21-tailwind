@@ -1,1 +1,40 @@
-<p>not-found works!</p>
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <p-card styleClass="w-full max-w-2xl shadow-2xl border-round-3xl overflow-hidden">
+        <div class="flex flex-col items-center text-center p-8 gap-6">
+            <div class="bg-blue-100 text-blue-600 rounded-full w-28 h-28 flex items-center justify-center">
+                <i class="pi pi-exclamation-circle text-6xl"></i>
+            </div>
+
+            <div>
+                <h1 class="text-7xl font-extrabold text-gray-800 m-0">
+                    404
+                </h1>
+                <h2 class="text-2xl font-semibold text-gray-700 mt-2">
+                    Página no encontrada
+                </h2>
+            </div>
+
+            <p class="text-gray-500 text-lg max-w-xl leading-relaxed">
+                La página que intentas visitar no existe,
+                fue movida o no tienes permisos para acceder.
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-4 mt-4">
+                <p-button
+                    label="Ir al dashboard"
+                    icon="pi pi-home"
+                    severity="info"
+                    routerLink="/">
+                </p-button>
+
+                <p-button
+                    label="Regresar"
+                    icon="pi pi-arrow-left"
+                    severity="secondary"
+                    [outlined]="true"
+                    (onClick)="location.back()">
+                </p-button>
+            </div>
+        </div>
+    </p-card>
+</div>

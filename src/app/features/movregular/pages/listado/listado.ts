@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardModule } from 'primeng/card';
-import { CardList } from '../../../../shared/components/card-list/card-list';
 import { ButtonModule } from 'primeng/button';
 import { DynamicTable } from '../../../../shared/components/dynamic-table/dynamic-table';
 import { RouterLink } from '@angular/router';
@@ -8,26 +7,11 @@ import { TableColumn } from '../../../../shared/interfaces/dynamic-table.interfa
 
 @Component({
   selector: 'app-listado',
-  imports: [CardModule, CardList, ButtonModule, DynamicTable, RouterLink],
+  imports: [CardModule, ButtonModule, DynamicTable, RouterLink],
   templateUrl: './listado.html',
   styleUrl: './listado.css',
 })
 export class Listado {
-  modulos: ModuloDashboard[] = [
-    {
-      nombre: 'Dashboard',
-      descripcion: 'Vista principal del aplicativo Frio Express.',
-      icono: 'pi pi-home',
-      ruta: '/'
-    },
-    {
-      nombre: 'Viajes',
-      descripcion: 'Administración y seguimiento de viajes.',
-      icono: 'pi pi-send',
-      ruta: '/viajes'
-    }
-  ];
-
    cols: TableColumn[] = [
       {
         field: 'id_movreg',
@@ -37,6 +21,10 @@ export class Listado {
       {
         field: 'cve_empaque_origen',
         header: 'Empaque Origen'
+      },
+      {
+        field: 'cve_empaque_destino',
+        header: 'Empaque Destino'
       },
       {
         field: 'estatus',
@@ -66,24 +54,28 @@ export class Listado {
       {
         id_movreg: 1001,
         cve_empaque_origen: 'FALKTALARETX',
+        cve_empaque_destino: 'NISS1AGUAAG',
         estatus: 'ACTIVO',
         custodia: true
       },
       {
         id_movreg: 1002,
         cve_empaque_origen: 'AGUATALARETX',
+        cve_empaque_destino: 'NISS2AGUAAG',
         estatus: 'FINALIZADO',
         custodia: false
       },
       {
         id_movreg: 1003,
         cve_empaque_origen: 'SFRTALARETX',
+        cve_empaque_destino: 'FRIOEXAGUAAG',
         estatus: 'FINALIZADO',
         custodia: false
       },
       {
         id_movreg: 1004,
         cve_empaque_origen: 'NULATALARETX',
+        cve_empaque_destino: 'GUADZAPOJA',
         estatus: 'CANCELADO',
         custodia: false
       }
