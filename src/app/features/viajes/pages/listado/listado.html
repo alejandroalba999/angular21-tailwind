@@ -1,4 +1,17 @@
-<p>listado viajes works!</p>
-<div class="m-3">
-    <p-button label="Listado de Viajes" severity="info"/>
+<div class="mb-4 p-8">
+    <p-card header="Listado de Viajes">
+        <p class="m-0">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+            numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
+            cupiditate neque
+            quas!
+        </p>
+        <ng-template pTemplate="footer">
+            <div class="mt-3">
+                <p-button label="Guardar"></p-button>
+                <p-button label="Formulario" severity="info" class="ml-2"
+                    [routerLink]="'/viajes/formulario'"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
 </div>
