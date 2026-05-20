@@ -1,1 +1,161 @@
-<p>dynamic-table works!</p>
+<div class="w-full">
+
+    <p-table class="w-full" styleClass="p-datatable-sm p-datatable-striped" [value]="data" [loading]="loading"
+        [paginator]="paginator" [rows]="rows" [lazy]="lazy" [totalRecords]="totalRecords" [rowHover]="true"
+        responsiveLayout="scroll" (onLazyLoad)="lazyLoad.emit($event)" (onRowSelect)="rowSelect.emit($event)">
+        <ng-template pTemplate="header">
+
+            <tr>
+
+                @for (
+                col of columns;
+                track col.field
+                ) {
+
+                @if (!col.hidden) {
+
+                <th [pSortableColumn]="col.sortable ? col.field : undefined" [style.width]="col.width">
+
+                    <div class="flex items-center gap-2">
+
+                        <span>
+                            {{ col.header }}
+                        </span>
+
+                        @if (col.sortable) {
+                        <p-sortIcon [field]="col.field.toString()" />
+                        }
+
+                    </div>
+
+                </th>
+
+                }
+
+                }
+
+            </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="body" let-row>
+
+            <tr>
+
+                @for (
+                col of columns;
+                track col.field
+                ) {
+
+                @if (!col.hidden) {
+
+                <td>
+
+                    @switch (col.type) {
+
+                    <!-- TAG -->
+
+                    @case ('tag') {
+
+                    <p-tag [value]="
+                      col.formatter
+                        ? col.formatter(
+                            getValue(row, col.field.toString()),
+                            row
+                          )
+                        : getValue(row, col.field.toString())
+                    " [severity]="
+                      col.tagSeverity
+                        ? col.tagSeverity(
+                            getValue(row, col.field.toString()),
+                            row
+                          )
+                        : 'info'
+                    " />
+
+                    }
+
+
+                    @case ('boolean') {
+
+                    <span>
+
+                        {{
+                        getValue(row, col.field.toString())
+                        ? 'SI'
+                        : 'NO'
+                        }}
+
+                    </span>
+
+                    }
+
+                    @case ('custom') {
+
+                    <span>
+
+                        {{
+                        col.formatter?.(
+                        getValue(row, col.field.toString()),
+                        row
+                        )
+                        }}
+
+                    </span>
+
+                    }
+
+                    @default {
+
+                    <span>
+
+                        {{
+                        col.formatter
+                        ? col.formatter(
+                        getValue(row, col.field.toString()),
+                        row
+                        )
+                        : getValue(row, col.field.toString())
+                        }}
+
+                    </span>
+
+                    }
+
+                    }
+
+                </td>
+
+                }
+
+                }
+
+            </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+
+            <tr>
+
+                <td [attr.colspan]="columns.length" class="text-center py-8">
+
+                    <div class="flex flex-col items-center gap-2">
+
+                        <i class="pi pi-inbox text-4xl text-gray-400"></i>
+
+                        <span class="text-gray-500">
+                            No hay registros
+                        </span>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+
+</div>

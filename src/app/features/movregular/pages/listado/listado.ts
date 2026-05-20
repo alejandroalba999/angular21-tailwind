@@ -15,6 +15,12 @@ export class Listado {
       descripcion: 'Vista principal del aplicativo Frio Express.',
       icono: 'pi pi-home',
       ruta: '/'
+    },
+    {
+      nombre: 'Viajes',
+      descripcion: 'Administración y seguimiento de viajes.',
+      icono: 'pi pi-send',
+      ruta: '/viajes'
     }
   ];
 }

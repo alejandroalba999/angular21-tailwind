@@ -4,7 +4,7 @@
             @for (modulo of modulos; track modulo.ruta) {
             <div class="h-full">
                 <p-card styleClass="h-full">
-                    <div class="flex flex-col justify-between h-full min-h-[220px]">
+                    <div class="flex flex-col justify-between h-full" [style.minHeight.px]="minHeighCard">
                         <div class="flex flex-col gap-4">
                             <div class="flex items-center gap-3">
                                  <i [class]="modulo.icono + ' text-3xl'"></i>

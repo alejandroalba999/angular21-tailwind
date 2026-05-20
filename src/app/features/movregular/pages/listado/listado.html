@@ -1,7 +1,8 @@
-<p-card [header]="'Listado del movimiento regular'" class="m-3">
-    <div>
+<p-card [header]="'Listado del movimiento regular'">
+    <div class="min-h-[500px]">
         <h3> VACIO...</h3>
     </div>
-    <fe-card-list [modulos]="modulos" [title]="'Navegar a...'" [subtitle]="'Componente reusable <fe-card-list>'"></fe-card-list>
-
+    <ng-template #footer>
+        <fe-card-list [modulos]="modulos" [cardSize]="'xs'"></fe-card-list>
+    </ng-template>
 </p-card>
