@@ -1,8 +1,11 @@
-<p-card [header]="'Listado del movimiento regular'">
-    <div class="min-h-[500px]">
-        <h3> VACIO...</h3>
-    </div>
-    <ng-template #footer>
-        <fe-card-list [modulos]="modulos" [cardSize]="'xs'"></fe-card-list>
-    </ng-template>
-</p-card>
+<div class="mb-4 p-8">
+    <p-card [header]="'Listado del movimiento regular'">
+        <div class="mb-5 mt-3 flex justify-end">
+            <p-button label="Mov. Regular" severity="info" class="ml-2" [routerLink]="'/movimiento_regular/formulario'"
+                icon="pi pi-plus"></p-button>
+        </div>
+        <fe-dynamic-table [columns]="cols" [data]="movRegulares"></fe-dynamic-table>
+    </p-card>
+</div>
+
+ <fe-card-list [modulos]="modulos" [cardSize]="'xs'"></fe-card-list>
