@@ -3,7 +3,7 @@
         <div class="mb-5 flex justify-end">
             <p-button label="Viaje" severity="info" class="ml-2" [routerLink]="'/viajes/formulario'" icon="pi pi-plus" size="small"></p-button>
         </div>
-        <fe-dynamic-table [columns]="cols" [data]="viajes"></fe-dynamic-table>
+        <fe-dynamic-table [columns]="cols" [data]="viajes()"></fe-dynamic-table>
         
         <div class="mb-5 mt-3 flex justify-end">
             <p-button label="Regresar" severity="info" class="ml-2" [text]="true" [routerLink]="'/'" icon="pi pi-arrow-left" size="small"></p-button>

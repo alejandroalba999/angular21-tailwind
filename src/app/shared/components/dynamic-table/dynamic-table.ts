@@ -46,7 +46,7 @@ export class DynamicTable {
   rowSelect = new EventEmitter<any>();
 
   getValue(row: any, field: string) {
-    return row[field];
+    return row?.[field];
   }
 
 }

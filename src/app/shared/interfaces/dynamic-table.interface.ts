@@ -25,7 +25,8 @@ export interface TableColumn<T = any> {
     | 'warn'
     | 'danger'
     | 'secondary'
-    | 'contrast';
+    | 'contrast'
+    | 'light';
 
   formatter?: (value: any, row: T) => any;
 }

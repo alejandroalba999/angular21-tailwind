@@ -30,27 +30,50 @@ export const data = [
 export const definirColumnas: TableColumn[]  = [
     {
       field: 'id_viaje',
-      header: 'Viaje',
+      header: 'VIAJE',
       sortable: true
     },
     {
-      field: 'operador',
-      header: 'Operador'
+      field: 'cve_ubicacion_origen',
+      header: 'CLAVE DE ORIGEN'
     },
     {
-      field: 'estatus',
+      field: 'cve_ubicacion_destino',
+      header: 'CLAVE DE DESTINO'
+    },
+    {
+      field: 'flete',
+      header: 'FLETE',
+      type: 'text'
+    },
+    {
+      field: 'eta_planeado',
+      header: 'ETA PLANEADO',
+      type: 'date'
+    },
+    {
+      field: 'eta_calculado',
+      header: 'ETA CALCULADO',
+      type: 'date'
+    },
+    {
+      field: 'facturar_a',
+      header: 'RFC'
+    },
+    {
+      field: 'estado',
       header: 'Estatus',
       type: 'tag',
       tagSeverity: (value) => {
         switch (value) {
           case 'ACTIVO':
             return 'success';
-          case 'FINALIZADO':
+          case 'INICIAD0':
             return 'info';
           case 'CANCELADO':
             return 'warn';
           default:
-            return 'contrast';
+            return 'light';
         }
       }
     },

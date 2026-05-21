@@ -1,11 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { RouterLink } from "@angular/router";
 import { DynamicTable } from '../../../../shared/components/dynamic-table/dynamic-table';
 import { TableColumn } from '../../../../shared/interfaces/dynamic-table.interface';
-import { data, definirColumnas } from '../../models/temporal.model';
+import { definirColumnas } from '../../models/temporal.model';
 import { ViajesService } from '../../services/viajes';
+import { IViaje } from '../../interfaces/viaje.interface';
 @Component({
   selector: 'app-listado',
   imports: [ButtonModule, CardModule, RouterLink, DynamicTable],
@@ -14,7 +15,7 @@ import { ViajesService } from '../../services/viajes';
 })
 export class Listado implements OnInit{
   cols: TableColumn[] = definirColumnas;
-  viajes = data;
+  viajes = signal<IViaje[]>([]);
 
   private readonly _viajesService = inject(ViajesService);
    
@@ -24,7 +25,7 @@ export class Listado implements OnInit{
 
   obtenerListadoViaje = () => {
     this._viajesService.obtenerListado().subscribe({
-      next: (data) => console.log(data)
+      next: (data) => this.viajes.set(data.viajes)
     })
   }
 }
