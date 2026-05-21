@@ -1,32 +1,5 @@
 import { TableColumn } from "../../../shared/interfaces/dynamic-table.interface";
 
-export const data = [
-    {
-      id_viaje: 1001,
-      operador: 'Juan Pérez',
-      estatus: 'ACTIVO',
-      custodia: true
-    },
-    {
-      id_viaje: 1002,
-      operador: 'Roberto Gomez',
-      estatus: 'FINALIZADO',
-      custodia: false
-    },
-    {
-      id_viaje: 1003,
-      operador: 'Ruben Fernandez',
-      estatus: 'FINALIZADO',
-      custodia: false
-    },
-    {
-      id_viaje: 1004,
-      operador: 'Carlos López',
-      estatus: 'CANCELADO',
-      custodia: false
-    }
-  ]
-
 export const definirColumnas: TableColumn[]  = [
     {
       field: 'id_viaje',
@@ -71,9 +44,9 @@ export const definirColumnas: TableColumn[]  = [
           case 'INICIAD0':
             return 'info';
           case 'CANCELADO':
-            return 'warn';
+            return 'danger';
           default:
-            return 'light';
+            return 'warn';
         }
       }
     },
