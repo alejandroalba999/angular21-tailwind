@@ -4,10 +4,14 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicTable } from '../../../../shared/components/dynamic-table/dynamic-table';
 import { RouterLink } from '@angular/router';
 import { TableColumn } from '../../../../shared/interfaces/dynamic-table.interface';
+import { FeTitleComponent } from '../../../../shared/components/title/title';
 
 @Component({
   selector: 'app-listado',
-  imports: [CardModule, ButtonModule, DynamicTable, RouterLink],
+  imports: [
+    CardModule, ButtonModule, 
+    DynamicTable, RouterLink, FeTitleComponent
+  ],
   templateUrl: './listado.html',
   styleUrl: './listado.css',
 })

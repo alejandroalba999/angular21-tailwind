@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { FeSkeletonComponent } from '../../../../shared/components/skeleton/skeleton';
 
 @Component({
   selector: 'app-formulario',
-  imports: [],
+  imports: [
+    FeSkeletonComponent
+  ],
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })

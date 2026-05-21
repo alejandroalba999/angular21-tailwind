@@ -1,12 +1,16 @@
 <div class="mb-4 p-8">
-    <p-card [header]="'Listado del movimiento regular'">
-        <div class="mb-5 flex justify-end">
-            <p-button label="Mov. Regular" severity="info" class="ml-2" [routerLink]="'/movimiento_regular/formulario'"
-                icon="pi pi-plus" size="small"></p-button>
+    <p-card>
+        <div class="flex items-center justify-between mb-5">
+            <fe-title title="MOVIMIENTO REGULAR"></fe-title>
+            <p-button label="Mov. Regular" severity="info" icon="pi pi-plus" size="small"
+                [routerLink]="'/movimiento_regular/formulario'">
+            </p-button>
+
         </div>
         <fe-dynamic-table [columns]="cols" [data]="movRegulares"></fe-dynamic-table>
         <div class="mb-5 mt-3 flex justify-end">
-            <p-button label="Regresar" severity="info" class="ml-2" [text]="true" [routerLink]="'/'" icon="pi pi-arrow-left" size="small"></p-button>
+            <p-button label="Regresar" severity="info" class="ml-2" [text]="true" [routerLink]="'/'"
+                icon="pi pi-arrow-left" size="small"></p-button>
         </div>
     </p-card>
 </div>
