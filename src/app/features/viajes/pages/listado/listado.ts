@@ -24,8 +24,7 @@ export class Listado implements OnInit{
 
   obtenerListadoViaje = () => {
     this._viajesService.obtenerListado().subscribe({
-      next: (data) => console.log(data),
-      error: (err) => console.error(err)
+      next: (data) => console.log(data)
     })
   }
 }

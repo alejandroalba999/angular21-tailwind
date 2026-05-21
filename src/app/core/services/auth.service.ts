@@ -41,6 +41,9 @@ export class AuthService {
                 STORAGE_KEYS.TOKEN
             );
 
+            localStorage.removeItem(
+                STORAGE_KEYS.USER
+            );
         }
         this._token.set(null);
     }
