@@ -14,6 +14,6 @@ export class ViajesService {
   private readonly idCompania = environment.id_compania;
 
   obtenerListado(filtros: TableState): Observable<IResponseViaje> {
-    return this.http.post<any>(`${this.apiUrl}/compania/${this.idCompania}`,filtros);
+    return this.http.post<IResponseViaje>(`${this.apiUrl}/compania/${this.idCompania}`,filtros);
   }
 }
