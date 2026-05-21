@@ -1,0 +1,11 @@
+[
+  {
+        "context": ["/api-despacho/"],
+        "target": "http://127.0.0.1:5001",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/api-despacho/": ""},
+        "ws": true
+    }
+]
