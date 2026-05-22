@@ -14,6 +14,8 @@ export class ViajesService {
   private readonly idCompania = environment.id_compania;
 
   obtenerListado(filtros: TableState): Observable<IResponseViaje> {
-    return this.http.post<IResponseViaje>(`${this.apiUrl}/compania/${this.idCompania}`,filtros);
+    const eFiltros: any = filtros;
+    if(filtros.sortOrder) eFiltros.sortOrder = filtros.sortOrder == 1 ? 'ASC' : 'DESC';
+    return this.http.post<IResponseViaje>(`${this.apiUrl}/compania/${this.idCompania}`,eFiltros);
   }
 }

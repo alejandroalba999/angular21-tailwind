@@ -14,6 +14,8 @@ export class MovimientoRegularService {
   private readonly idCompania = environment.id_compania;
 
   obtenerListado(filtros: TableState): Observable<IResponseMovRegular> {
-    return this.http.post<IResponseMovRegular>(`${this.apiUrl}/compania/${this.idCompania}`,filtros);
+    const eFiltros: any = filtros;
+    if(filtros.sortOrder) eFiltros.sortOrder = filtros.sortOrder == 1 ? 'ASC' : 'DESC';
+    return this.http.post<IResponseMovRegular>(`${this.apiUrl}/compania/${this.idCompania}`,eFiltros);
   }
 }

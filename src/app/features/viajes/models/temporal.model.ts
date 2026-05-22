@@ -34,8 +34,23 @@ export const definirColumnas: TableColumn[]  = [
       header: 'RFC'
     },
     {
+      field: 'parada_intermedia',
+      header: 'P.I.',
+      type: 'tag',
+      tagSeverity: (value) => {
+        switch (value) {
+          case 'SI':
+            return 'success';
+          case 'NO':
+            return 'danger';
+          default:
+            return 'info';
+        }
+      }
+    },
+    {
       field: 'estado',
-      header: 'Estatus',
+      header: 'ESTATUS',
       type: 'tag',
       tagSeverity: (value) => {
         switch (value) {
@@ -52,7 +67,7 @@ export const definirColumnas: TableColumn[]  = [
     },
     {
       field: 'custodia',
-      header: 'Custodia',
+      header: 'CUSTODIA',
       type: 'boolean'
     }
   ];

@@ -25,7 +25,9 @@ export class Listado implements OnInit{
   totalRegistros = signal<number>(0);
   filtrosGlobales: TableState = {
     first: 0,
-    rows: 10
+    rows: 10,
+    sortField: 'id_viaje',
+    sortOrder: -1
   }
 
   private readonly _viajesService = inject(ViajesService);
@@ -47,6 +49,8 @@ export class Listado implements OnInit{
     this.viajes.set([]);
     this.filtrosGlobales.first = event.first || 0;
     this.filtrosGlobales.rows = event.rows || 10;
+    this.filtrosGlobales.sortField = event.sortField;
+    this.filtrosGlobales.sortOrder = event.sortOrder;
     this.obtenerListadoViaje(this.filtrosGlobales);
   }
 }

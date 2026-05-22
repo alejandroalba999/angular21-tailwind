@@ -28,7 +28,9 @@ export class Listado implements OnInit {
   totalRegistros = signal<number>(0);
   filtrosGlobales: TableState = {
     first: 0,
-    rows: 10
+    rows: 10,
+    sortField: 'num_mov_regular',
+    sortOrder: -1
   }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class Listado implements OnInit {
 
   obtenerListadoMovRegular = (filtros: TableState) => {
     this._movRegularService.obtenerListado(filtros).subscribe({
-      next: (data: { mov_regular: any[], total_registros: number }) => {
+      next: (data) => {
         this.movRegulares.set(data.mov_regular)
         this.totalRegistros.set(data.total_registros);
       }
@@ -48,6 +50,8 @@ export class Listado implements OnInit {
     this.movRegulares.set([]);
     this.filtrosGlobales.first = event.first || 0;
     this.filtrosGlobales.rows = event.rows || 10;
+    this.filtrosGlobales.sortField = event.sortField;
+    this.filtrosGlobales.sortOrder = event.sortOrder;
     this.obtenerListadoMovRegular(this.filtrosGlobales);
   }
 
