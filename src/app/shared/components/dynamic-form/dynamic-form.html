@@ -1,1 +1,212 @@
-<p>dynamic-form works!</p>
+<form [formGroup]="form" class="flex flex-col gap-4">
+
+    @for (subForm of config.formularios; track subForm.identificador) {
+
+    <p-card class="w-full">
+
+        <ng-template pTemplate="header">
+
+            <div class="flex items-center justify-between p-4">
+
+                <div class="flex items-center gap-2">
+
+                    @if (subForm.icono) {
+
+                    <i [class]="subForm.icono"></i>
+
+                    }
+
+                    <span class="font-semibold text-lg">
+                        {{ subForm.titulo }}
+                    </span>
+
+                </div>
+
+                @if (subForm.botonesHeader?.length) {
+
+                <div class="flex items-center gap-2">
+
+                    @for (
+                    button of subForm.botonesHeader;
+                    track button.label
+                    ) {
+
+                    <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
+                        [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
+                        [disabled]="button.disabled" (onClick)="onClickButton(button)" />
+
+                    }
+
+                </div>
+
+                }
+
+            </div>
+
+            <p-divider></p-divider>
+
+        </ng-template>
+
+        <div class="flex flex-wrap -mx-2">
+
+            @for (field of subForm.formulario.fields; track field.key) {
+
+            @if (isVisible(field)) {
+
+            <div class="px-2 mb-4" [ngClass]="field.colSize || 'w-full'">
+
+                <label [for]="field.key" class="block mb-2 font-medium">
+
+                    {{ field.label }}
+
+                    @if (field.required) {
+
+                    <span class="text-red-500 ml-1">
+                        *
+                    </span>
+
+                    }
+
+                </label>
+
+                <!-- ================================
+                   FIELD TYPES
+              ================================= -->
+
+                @switch (field.type) {
+
+                <!-- TEXT -->
+
+                @case ('text') {
+
+                <input pInputText class="w-full" [id]="field.key" [placeholder]="field.placeholder"
+                    [formControlName]="field.key" />
+
+                }
+
+                <!-- NUMBER -->
+
+                @case ('number') {
+
+                <p-inputNumber [inputId]="field.key" [placeholder]="field.placeholder" [formControlName]="field.key"
+                    styleClass="w-full" />
+
+                }
+
+                <!-- DATE -->
+
+                @case ('date') {
+
+                <p-datepicker [inputId]="field.key" [formControlName]="field.key" styleClass="w-full" appendTo="body" />
+
+                }
+
+                <!-- TEXTAREA -->
+
+                @case ('textarea') {
+
+                <textarea pInputTextarea rows="4" class="w-full" [id]="field.key" [placeholder]="field.placeholder"
+                    [formControlName]="field.key"></textarea>
+
+                }
+
+                <!-- CHECKBOX -->
+
+                @case ('checkbox') {
+
+                <div class="flex items-center gap-2">
+
+                    <p-checkbox binary="true" [inputId]="field.key" [formControlName]="field.key" />
+
+                    <label [for]="field.key">
+                        {{ field.placeholder || field.label }}
+                    </label>
+
+                </div>
+
+                }
+
+                <!-- SELECT -->
+
+                @case ('select') {
+
+                <p-select [options]="field.options || []" optionLabel="label" optionValue="value"
+                    [placeholder]="field.placeholder" [formControlName]="field.key" styleClass="w-full" />
+
+                }
+
+                }
+
+                <!-- ================================
+                   ERRORS
+              ================================= -->
+
+                @if (
+                getControl(field).invalid &&
+                getControl(field).touched
+                ) {
+
+                <small class="text-red-500 block mt-1">
+
+                    @if (
+                    getControl(field).errors?.['required']
+                    ) {
+                    Campo requerido
+                    }
+
+                    @if (
+                    getControl(field).errors?.['minlength']
+                    ) {
+                    Longitud mínima inválida
+                    }
+
+                    @if (
+                    getControl(field).errors?.['maxlength']
+                    ) {
+                    Longitud máxima inválida
+                    }
+
+                </small>
+
+                }
+
+            </div>
+
+            }
+
+            }
+
+        </div>
+
+        <!-- ========================================
+           FOOTER
+      ========================================= -->
+
+        @if (subForm.botonesFooter?.length) {
+
+        <ng-template pTemplate="footer">
+
+            <div class="flex justify-end gap-2">
+
+                @for (
+                button of subForm.botonesFooter;
+                track button.label
+                ) {
+
+                <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
+                    [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
+                    [disabled]="button.disabled" (onClick)="onClickButton(button)" />
+
+                }
+
+            </div>
+
+        </ng-template>
+
+        }
+
+    </p-card>
+
+    }
+
+</form>

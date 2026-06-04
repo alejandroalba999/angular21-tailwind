@@ -1,7 +1,7 @@
 [
   {
         "context": ["/api-despacho/"],
-        "target": "http://127.0.0.1:5001",
+        "target": "https://test.api-despacho.frioexpress.com",
         "secure": true,
         "changeOrigin": true,
         "logLevel": "debug",
