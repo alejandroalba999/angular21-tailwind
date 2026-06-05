@@ -2,9 +2,7 @@ import { DynamicFormConfig } from "../../../shared/interfaces/dynamic-form.inter
 
 export const FORM_DEFAULT: DynamicFormConfig = {
     titulo: 'Nuevo Viaje',
-
     icono: 'fa fa-calendar',
-
     formularios: [
         {
             titulo: 'Nuevo Viaje',
@@ -18,15 +16,16 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         key: "fec_carga",
                         label: "FECHA DE CARGA",
                         minLength: 0,
-                        placeholder: '',
                         maxLength: 10,
+                        placeholder: "",
                         min: 0,
                         max: 10,
                         pattern: "",
-                        defaultValue: Date.now(),
+                        defaultValue: null,
                         disabledFn: () => false,
-                        requiredFn: () => false,
+                        requiredFn: () => true,
                         visible: () => true,
+                        required: true,
                         hidden: false
                     },
                     {
@@ -44,6 +43,7 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         disabledFn: () => false,
                         requiredFn: () => true,
                         visible: () => true,
+                        required: true,
                         hidden: false
                     },
                     {
@@ -58,9 +58,10 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         max: 10,
                         pattern: "",
                         defaultValue: null,
-                        disabledFn: () => true,
+                        disabledFn: () => false,
                         requiredFn: () => true,
                         visible: () => true,
+                        required: true,
                         hidden: false
                     },
                     {
@@ -75,10 +76,83 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         max: 10,
                         pattern: "",
                         defaultValue: null,
+                        disabledFn: () => false,
+                        requiredFn: () => true,
+                        visible: () => true,
+                        required: true,
+                        hidden: false
+                    },
+                    {
+                        type: "date",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "fec_carga_original",
+                        label: "CITA DE CARGA ORIGINAL",
+                        minLength: 0,
+                        placeholder: '',
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: Date.now(),
+                        disabledFn: () => true,
+                        requiredFn: () => false,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "date",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "hora_carga_original",
+                        label: "HORA DE CITA DE CARGA ORIGINAL",
+                        minLength: 0,
+                        maxLength: 10,
+                        placeholder: "",
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: () => true,
+                        requiredFn: () => false,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "date",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "fec_descarga_original",
+                        label: "CITA DE DESCARGA ORIGINAL",
+                        placeholder: "",
+                        minLength: 0,
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
                         disabledFn: () => true,
                         requiredFn: () => true,
                         visible: () => true,
-                        hidden: false
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "date",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "hora_descarga_original",
+                        label: "HORA DE CITA DE DESCARGA ORIGINAL",
+                        placeholder: "",
+                        minLength: 0,
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: () => true,
+                        requiredFn: () => true,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
                     }
                 ]
             }
@@ -102,15 +176,16 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         pattern: "",
                         defaultValue: null,
                         disabledFn: () => false,
-                        requiredFn: () => false,
+                        requiredFn: () => true,
                         visible: () => true,
-                        hidden: false
+                        hidden: false,
+                        required: true
                     },
                     {
                         type: "text",
                         colSize: "w-full md:w-6/12 lg:w-3/12",
-                        key: "id_cliente",
-                        label: "CLIENTE",
+                        key: "version",
+                        label: "VERSIÓN",
                         minLength: 0,
                         maxLength: 10,
                         placeholder: "",
@@ -118,16 +193,35 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         max: 10,
                         pattern: "",
                         defaultValue: null,
-                        disabledFn: () => false,
-                        requiredFn: () => true,
+                        disabledFn: () => true,
+                        requiredFn: () => false,
                         visible: () => true,
-                        hidden: false
+                        hidden: false,
+                        disabled: true
                     },
                     {
                         type: "text",
                         colSize: "w-full md:w-6/12 lg:w-3/12",
-                        key: "id_caja",
-                        label: "CAJA",
+                        key: "nombre_corto",
+                        label: "NOMBRE CORTO",
+                        minLength: 0,
+                        maxLength: 10,
+                        placeholder: "",
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: () => true,
+                        requiredFn: () => false,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "text",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "facturar_a",
+                        label: "FACTURAR A",
                         placeholder: "",
                         minLength: 0,
                         maxLength: 10,
@@ -136,12 +230,70 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                         pattern: "",
                         defaultValue: null,
                         disabledFn: () => true,
-                        requiredFn: () => true,
+                        requiredFn: () => false,
                         visible: () => true,
-                        hidden: false
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "text",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "facturar_a",
+                        label: "ORIGEN",
+                        placeholder: "",
+                        minLength: 0,
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: () => true,
+                        requiredFn: () => false,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
+                    },
+                    {
+                        type: "text",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "facturar_a",
+                        label: "DESTINO",
+                        placeholder: "",
+                        minLength: 0,
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: () => true,
+                        requiredFn: () => false,
+                        visible: () => true,
+                        hidden: false,
+                        disabled: true
                     }
                 ]
-            }
+            },
+            botonesHeader: [
+                {
+                    label: '',
+                    icon: 'pi pi-eye',
+                    action: '',
+                    severity: 'info',
+                    visible: true,
+                    disabled: true,
+                    class: 'p-button p-button-sm'
+                }
+            ],
+            botonesFooter: [
+                {
+                    label: 'Guardar',
+                    action: '',
+                    severity: 'primary',
+                    visible: true,
+                    disabled: true,
+                    class: 'p-button p-button-sm'
+                }
+            ]
         }
     ]
 };

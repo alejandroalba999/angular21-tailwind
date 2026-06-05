@@ -66,8 +66,10 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.buildForm();
-
     this.listenDynamicChanges();
+    this.form.markAllAsTouched();
+    this.form.markAsDirty();
+    this.form.updateValueAndValidity();
   }
 
   buildForm(): FormGroup {

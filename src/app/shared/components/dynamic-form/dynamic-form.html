@@ -33,7 +33,7 @@
 
                     <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
                         [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
-                        [disabled]="button.disabled" (onClick)="onClickButton(button)" />
+                        [disabled]="button.disabled" (onClick)="onClickButton(button)" [styleClass]="button.class" />
 
                     }
 
@@ -69,13 +69,8 @@
 
                 </label>
 
-                <!-- ================================
-                   FIELD TYPES
-              ================================= -->
-
                 @switch (field.type) {
 
-                <!-- TEXT -->
 
                 @case ('text') {
 
@@ -84,7 +79,6 @@
 
                 }
 
-                <!-- NUMBER -->
 
                 @case ('number') {
 
@@ -93,15 +87,12 @@
 
                 }
 
-                <!-- DATE -->
-
                 @case ('date') {
 
-                <p-datepicker [inputId]="field.key" [formControlName]="field.key" styleClass="w-full" appendTo="body" />
+                <p-datepicker [inputId]="field.key" [formControlName]="field.key" styleClass="w-full" appendTo="body"
+                    [showIcon]="true" />
 
                 }
-
-                <!-- TEXTAREA -->
 
                 @case ('textarea') {
 
@@ -109,8 +100,6 @@
                     [formControlName]="field.key"></textarea>
 
                 }
-
-                <!-- CHECKBOX -->
 
                 @case ('checkbox') {
 
@@ -126,8 +115,6 @@
 
                 }
 
-                <!-- SELECT -->
-
                 @case ('select') {
 
                 <p-select [options]="field.options || []" optionLabel="label" optionValue="value"
@@ -136,10 +123,6 @@
                 }
 
                 }
-
-                <!-- ================================
-                   ERRORS
-              ================================= -->
 
                 @if (
                 getControl(field).invalid &&
@@ -178,13 +161,9 @@
 
         </div>
 
-        <!-- ========================================
-           FOOTER
-      ========================================= -->
-
         @if (subForm.botonesFooter?.length) {
 
-        <ng-template pTemplate="footer">
+        <ng-template #footer>
 
             <div class="flex justify-end gap-2">
 
@@ -195,7 +174,7 @@
 
                 <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
                     [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
-                    [disabled]="button.disabled" (onClick)="onClickButton(button)" />
+                    [disabled]="button.disabled" (onClick)="onClickButton(button)" [styleClass]="button.class" />
 
                 }
 

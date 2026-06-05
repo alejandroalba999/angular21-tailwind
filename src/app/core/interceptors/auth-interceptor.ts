@@ -10,8 +10,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = authService.token();
 
-  if (!token) {
-    return next(req);
+  if (!token || authService.isExpired()) {
+    localStorage.clear();
+    window.location.replace(
+      'http://localhost:4300'
+    );
   }
 
   const request = req.clone({
@@ -19,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       Authorization: `Bearer ${token}`
     }
   });
-  
+
   return next(request);
 
 };
