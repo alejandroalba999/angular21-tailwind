@@ -42,7 +42,9 @@ export interface DynamicField {
 
     defaultValue: unknown;
 
-    disabledFn: Function;
+    disabledFn: (
+    formValue: any
+  ) => boolean;
 
     requiredFn: Function;
 
@@ -56,7 +58,8 @@ export interface DynamicField {
     | 'date'
     | 'select'
     | 'textarea'
-    | 'checkbox';
+    | 'checkbox'
+    | 'radio';
 
     label: string;
 

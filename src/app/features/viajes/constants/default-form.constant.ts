@@ -238,7 +238,7 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                     {
                         type: "text",
                         colSize: "w-full md:w-6/12 lg:w-3/12",
-                        key: "facturar_a",
+                        key: "cve_origen",
                         label: "ORIGEN",
                         placeholder: "",
                         minLength: 0,
@@ -256,7 +256,7 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                     {
                         type: "text",
                         colSize: "w-full md:w-6/12 lg:w-3/12",
-                        key: "facturar_a",
+                        key: "cve_destino",
                         label: "DESTINO",
                         placeholder: "",
                         minLength: 0,
@@ -275,7 +275,7 @@ export const FORM_DEFAULT: DynamicFormConfig = {
             },
             botonesHeader: [
                 {
-                    label: '',
+                    label: 'Detalle',
                     icon: 'pi pi-eye',
                     action: '',
                     severity: 'info',
@@ -283,17 +283,125 @@ export const FORM_DEFAULT: DynamicFormConfig = {
                     disabled: true,
                     class: 'p-button p-button-sm'
                 }
-            ],
-            botonesFooter: [
+            ]
+        },
+        {
+            titulo: 'Paradas Intermedias',
+            icono: 'pi pi-map',
+            identificador: "0",
+            formulario: {
+                fields: []
+            },
+            botonesHeader: [
                 {
-                    label: 'Guardar',
+                    label: 'Agrear P.I.',
+                    icon: 'pi pi-plus',
                     action: '',
-                    severity: 'primary',
+                    severity: 'info',
                     visible: true,
                     disabled: true,
                     class: 'p-button p-button-sm'
                 }
             ]
-        }
+        },
+        {
+            titulo: 'Operación',
+            icono: 'pi pi-microchip',
+            identificador: "0",
+            formulario: {
+                fields: [
+                    {
+                        type: "select",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "tipo_carga",
+                        label: "TIPO CARGA",
+                        minLength: 0,
+                        maxLength: 10,
+                        placeholder: "",
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        options: [
+                            {
+                                label: 'DESCARGA',
+                                value: 'DES'
+                            },
+                            {
+                                label: 'DIRECTA',
+                                value: 'DIR'
+                            }
+                        ],
+                        defaultValue: 'DIR',
+                        disabledFn: () => false,
+                        requiredFn: () => true,
+                        visible: () => true,
+                        required: true,
+                        hidden: false
+                    },
+                    {
+                        type: "text",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "entregar_en",
+                        label: "ENTREGAR EN",
+                        minLength: 0,
+                        maxLength: 10,
+                        placeholder: "",
+                        min: 0,
+                        max: 10,
+                        pattern: "",
+                        defaultValue: null,
+                        disabledFn: (form) => form?.tipo_carga === 'DIR',
+                        requiredFn: () => true,
+                        visible: () => true,
+                        required: true,
+                        hidden: false
+                    },
+                    {
+                        type: "radio",
+                        colSize: "w-full md:w-6/12 lg:w-3/12",
+                        key: "descarga_autorizada",
+                        label: "DESCARGA AUTORIZADA",
+                        placeholder: '',
+                        minLength: 0,
+                        maxLength: 10,
+                        min: 0,
+                        max: 10,
+                        options: [
+                            {
+                                label: 'SI',
+                                value: true
+                            },
+                            {
+                                label: 'NO',
+                                value: false
+                            }
+                        ],
+                        pattern: "",
+                        defaultValue: true,
+                        disabledFn: (form) => form?.tipo_carga === 'DIR',
+                        requiredFn: () => true,
+                        visible: () => true,
+                        required: true,
+                        hidden: false,
+                        disabled: true
+                    }
+                ]
+            },
+            botonesFooter: [
+                {
+                    label: 'CANCELAR',
+                    severity: 'info',
+                    class: 'p-button p-button-sm',
+                    text: true,
+                    rounded: true
+                },
+                 {
+                    label: 'GUARDAR',
+                    severity: 'info',
+                    class: 'p-button p-button-sm',
+                    rounded: true
+                },
+            ]
+        },
     ]
 };

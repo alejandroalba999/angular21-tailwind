@@ -1,191 +1,207 @@
-<form [formGroup]="form" class="flex flex-col gap-4">
+<div class="max-h-[85vh] overflow-y-auto pr-2">
+    <form [formGroup]="form" class="flex flex-col gap-4">
 
-    @for (subForm of config.formularios; track subForm.identificador) {
+        @for (subForm of config.formularios; track subForm.identificador) {
 
-    <p-card class="w-full">
+        <p-card class="w-full">
 
-        <ng-template pTemplate="header">
+            <ng-template pTemplate="header">
 
-            <div class="flex items-center justify-between p-4">
+                <div class="flex items-center justify-between p-4">
 
-                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
 
-                    @if (subForm.icono) {
+                        @if (subForm.icono) {
 
-                    <i [class]="subForm.icono"></i>
+                        <i [class]="subForm.icono"></i>
+
+                        }
+
+                        <span class="font-semibold text-lg">
+                            {{ subForm.titulo }}
+                        </span>
+
+                    </div>
+
+                    @if (subForm.botonesHeader?.length) {
+
+                    <div class="flex items-center gap-2">
+
+                        @for (
+                        button of subForm.botonesHeader;
+                        track button.label
+                        ) {
+
+                        <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
+                            [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
+                            [disabled]="button.disabled" (onClick)="onClickButton(button)"
+                            [styleClass]="button.class" />
+
+                        }
+
+                    </div>
 
                     }
 
-                    <span class="font-semibold text-lg">
-                        {{ subForm.titulo }}
-                    </span>
+                </div>
+
+                <p-divider></p-divider>
+
+            </ng-template>
+
+            <div class="flex flex-wrap -mx-2">
+
+                @for (field of subForm.formulario.fields; track field.key) {
+
+                @if (isVisible(field)) {
+
+                <div class="px-2 mb-4 text-sm" [ngClass]="field.colSize || 'w-full'">
+
+                    <label [for]="field.key" class="block mb-2 font-semibold">
+
+                        {{ field.label }}
+
+                        @if (field.required) {
+
+                        <span class="text-red-500 ml-1">
+                            *
+                        </span>
+
+                        }
+
+                    </label>
+
+                    @switch (field.type) {
+
+
+                    @case ('text') {
+
+                    <input pInputText class="w-full p-inputtext-sm" [id]="field.key" [placeholder]="field.placeholder"
+                        [formControlName]="field.key" />
+
+                    }
+
+
+                    @case ('number') {
+
+                    <p-inputNumber [inputId]="field.key" [placeholder]="field.placeholder" [formControlName]="field.key"
+                        styleClass="w-full" />
+
+                    }
+
+                    @case ('date') {
+
+                    <p-datepicker [inputId]="field.key" [formControlName]="field.key" styleClass="w-full"
+                        appendTo="body" [showIcon]="true" [size]="'small'" />
+
+                    }
+
+                    @case ('textarea') {
+
+                    <textarea pInputTextarea rows="4" class="w-full" [id]="field.key" [placeholder]="field.placeholder"
+                        [formControlName]="field.key"></textarea>
+
+                    }
+
+                    @case ('radio') {
+
+                    <div class="flex flex-wrap gap-4">
+
+                        @for (
+                        option of field.options || [];
+                        track option.value
+                        ) {
+
+                        <div class="flex items-center gap-2">
+
+                            <p-radiobutton [inputId]="field.key + '_' + option.value" [name]="field.key"
+                                [value]="option.value" [formControlName]="field.key" />
+
+                            <label [for]="field.key + '_' + option.value">
+                                {{ option.label }}
+                            </label>
+
+                        </div>
+
+                        }
+
+                    </div>
+
+                    }
+
+                    @case ('select') {
+
+                    <p-select [options]="field.options || []" optionLabel="label" optionValue="value"
+                        [placeholder]="field.placeholder" [formControlName]="field.key" styleClass="w-full" [size]="'small'" appendTo="body"/>
+
+                    }
+
+                    }
+
+                    @if (
+                    getControl(field).invalid &&
+                    getControl(field).touched
+                    ) {
+
+                    <small class="text-red-500 block mt-1">
+
+                        @if (
+                        getControl(field).errors?.['required']
+                        ) {
+                        Campo requerido
+                        }
+
+                        @if (
+                        getControl(field).errors?.['minlength']
+                        ) {
+                        Longitud mínima inválida
+                        }
+
+                        @if (
+                        getControl(field).errors?.['maxlength']
+                        ) {
+                        Longitud máxima inválida
+                        }
+
+                    </small>
+
+                    }
 
                 </div>
 
-                @if (subForm.botonesHeader?.length) {
+                }
 
-                <div class="flex items-center gap-2">
+                }
+
+            </div>
+
+            @if (subForm.botonesFooter?.length) {
+
+            <ng-template #footer>
+
+                <div class="flex justify-end gap-2">
 
                     @for (
-                    button of subForm.botonesHeader;
+                    button of subForm.botonesFooter;
                     track button.label
                     ) {
 
                     <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
                         [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
-                        [disabled]="button.disabled" (onClick)="onClickButton(button)" [styleClass]="button.class" />
+                        [disabled]="button.disabled" (onClick)="onClickButton(button)" 
+                        [styleClass]="button.class"  [text]="button.text"/>
 
                     }
 
                 </div>
 
-                }
-
-            </div>
-
-            <p-divider></p-divider>
-
-        </ng-template>
-
-        <div class="flex flex-wrap -mx-2">
-
-            @for (field of subForm.formulario.fields; track field.key) {
-
-            @if (isVisible(field)) {
-
-            <div class="px-2 mb-4" [ngClass]="field.colSize || 'w-full'">
-
-                <label [for]="field.key" class="block mb-2 font-medium">
-
-                    {{ field.label }}
-
-                    @if (field.required) {
-
-                    <span class="text-red-500 ml-1">
-                        *
-                    </span>
-
-                    }
-
-                </label>
-
-                @switch (field.type) {
-
-
-                @case ('text') {
-
-                <input pInputText class="w-full" [id]="field.key" [placeholder]="field.placeholder"
-                    [formControlName]="field.key" />
-
-                }
-
-
-                @case ('number') {
-
-                <p-inputNumber [inputId]="field.key" [placeholder]="field.placeholder" [formControlName]="field.key"
-                    styleClass="w-full" />
-
-                }
-
-                @case ('date') {
-
-                <p-datepicker [inputId]="field.key" [formControlName]="field.key" styleClass="w-full" appendTo="body"
-                    [showIcon]="true" />
-
-                }
-
-                @case ('textarea') {
-
-                <textarea pInputTextarea rows="4" class="w-full" [id]="field.key" [placeholder]="field.placeholder"
-                    [formControlName]="field.key"></textarea>
-
-                }
-
-                @case ('checkbox') {
-
-                <div class="flex items-center gap-2">
-
-                    <p-checkbox binary="true" [inputId]="field.key" [formControlName]="field.key" />
-
-                    <label [for]="field.key">
-                        {{ field.placeholder || field.label }}
-                    </label>
-
-                </div>
-
-                }
-
-                @case ('select') {
-
-                <p-select [options]="field.options || []" optionLabel="label" optionValue="value"
-                    [placeholder]="field.placeholder" [formControlName]="field.key" styleClass="w-full" />
-
-                }
-
-                }
-
-                @if (
-                getControl(field).invalid &&
-                getControl(field).touched
-                ) {
-
-                <small class="text-red-500 block mt-1">
-
-                    @if (
-                    getControl(field).errors?.['required']
-                    ) {
-                    Campo requerido
-                    }
-
-                    @if (
-                    getControl(field).errors?.['minlength']
-                    ) {
-                    Longitud mínima inválida
-                    }
-
-                    @if (
-                    getControl(field).errors?.['maxlength']
-                    ) {
-                    Longitud máxima inválida
-                    }
-
-                </small>
-
-                }
-
-            </div>
+            </ng-template>
 
             }
 
-            }
-
-        </div>
-
-        @if (subForm.botonesFooter?.length) {
-
-        <ng-template #footer>
-
-            <div class="flex justify-end gap-2">
-
-                @for (
-                button of subForm.botonesFooter;
-                track button.label
-                ) {
-
-                <p-button [label]="button.label" [icon]="button.icon" [severity]="button.severity"
-                    [outlined]="button.outlined" [text]="button.text" [rounded]="button.rounded"
-                    [disabled]="button.disabled" (onClick)="onClickButton(button)" [styleClass]="button.class" />
-
-                }
-
-            </div>
-
-        </ng-template>
+        </p-card>
 
         }
 
-    </p-card>
-
-    }
-
-</form>
+    </form>
+</div>

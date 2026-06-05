@@ -29,6 +29,7 @@ import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DynamicField, DynamicFormConfig } from '../../interfaces/dynamic-form.interface';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @Component({
   selector: 'fe-dynamic-form',
@@ -46,7 +47,8 @@ import { DynamicField, DynamicFormConfig } from '../../interfaces/dynamic-form.i
     CheckboxModule,
     SelectModule,
     ButtonModule,
-    DividerModule
+    DividerModule,
+    RadioButtonModule
   ],
 
   templateUrl: './dynamic-form.html',
